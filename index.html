@@ -5,54 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sedin Mulasalihovic – Portfolio</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --text: #121212;
+      --card: #f0f0f0;
+      --accent: #00796b;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --card: #1e1e1e;
+      --accent: #80cbc4;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* Light Mode */
-    body.light {
-      background-color: #f0f0f0;
-      color: #121212;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
-      background-color: #1e1e1e;
-      padding: 2rem;
+      background-color: var(--card);
+      padding: 3rem 2rem 2rem;
       text-align: center;
-      transition: background-color 0.3s;
-    }
-    body.light header {
-      background-color: #ddd;
+      position: relative;
     }
 
-    header h1 {
-      margin: 0;
+    #typed-text {
       font-size: 2.5rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--accent);
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: var(--accent) }
+    }
+
+    .mode-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
     }
 
     nav {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
 
     nav a {
       margin: 0 1rem;
-      color: #80cbc4;
+      color: var(--accent);
       text-decoration: none;
-      transition: color 0.3s;
-    }
-    body.light nav a {
-      color: #00796b;
+      font-weight: bold;
     }
 
     section {
       padding: 2rem;
       max-width: 900px;
       margin: auto;
-      transition: background-color 0.3s, color 0.3s;
     }
 
     .skills {
@@ -62,16 +95,11 @@
     }
 
     .skill {
-      background-color: #1f1f1f;
+      background-color: var(--card);
       padding: 1rem;
       border-radius: 8px;
       flex: 1 1 100px;
       text-align: center;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.light .skill {
-      background-color: #e0e0e0;
-      color: #121212;
     }
 
     .projects {
@@ -81,73 +109,54 @@
     }
 
     .project {
-      background-color: #1f1f1f;
+      background-color: var(--card);
       padding: 1rem;
       border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.light .project {
-      background-color: #e0e0e0;
-      color: #121212;
     }
 
     .project img {
       width: 100%;
       border-radius: 6px;
+      object-fit: cover;
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      background-color: #1e1e1e;
+      background-color: var(--card);
       margin-top: 3rem;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.light footer {
-      background-color: #ddd;
-      color: #121212;
     }
 
     a.button {
       display: inline-block;
       margin-top: 1rem;
-      background-color: #80cbc4;
-      color: #000;
+      background-color: var(--accent);
+      color: #fff;
       padding: 0.5rem 1rem;
       border-radius: 6px;
       text-decoration: none;
-      transition: background-color 0.3s;
-    }
-    a.button:hover {
-      background-color: #4db6ac;
     }
 
-    /* Switcher Button */
-    #mode-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background-color: #80cbc4;
-      border: none;
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      color: #000;
-      transition: background-color 0.3s;
-      z-index: 1000;
-    }
-    #mode-toggle:hover {
-      background-color: #4db6ac;
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      .skills {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
-<body>
-
-  <button id="mode-toggle">Light Mode</button>
-
+<body class="dark">
   <header>
-    <h1>Sedin Mulasalihovic</h1>
+    <div id="typed-text">Sedin Mulasalihovic</div>
+    <button class="mode-toggle" onclick="toggleMode()">Light/Dark</button>
     <nav>
       <a href="#about">Über mich</a>
       <a href="#skills">Skills</a>
@@ -158,9 +167,8 @@
 
   <section id="about">
     <h2>Über mich</h2>
-    <p>Ich bin ein 15-jähriger Entwickler mit großer Leidenschaft für Webentwicklung, Discord-Bots und kreatives Programmieren. Seit über 4 Jahren beschäftige ich mich intensiv mit verschiedenen Programmiersprachen wie HTML, CSS, JavaScript, Python, Bash und C#.</p>
-    <p>In dieser Zeit habe ich viele praktische Erfahrungen gesammelt und erfolgreich eigene Projekte umgesetzt, die mir geholfen haben, mein Wissen stetig zu erweitern und meine Fähigkeiten zu verbessern.
-      Mein Ziel ist es, weiterhin spannende Anwendungen zu entwickeln, mich kontinuierlich weiterzubilden und meine Projekte mit der Community zu teilen.</p>
+    <p>Ich bin ein 15-jähriger Entwickler mit großer Leidenschaft für Webentwicklung, Discord-Bots und kreatives Programmieren. Seit über 4 Jahren beschäftige ich mich intensiv mit HTML, CSS, JavaScript, Python, Bash und C#.</p>
+    <p>Ich habe viele praktische Erfahrungen gesammelt und eigene Projekte umgesetzt, die mir geholfen haben, mein Wissen stetig zu erweitern und meine Fähigkeiten zu verbessern. Mein Ziel ist es, spannende Anwendungen zu entwickeln und mit der Community zu teilen.</p>
   </section>
 
   <section id="skills">
@@ -197,7 +205,7 @@
     <h2>Kontakt</h2>
     <p>Du willst mit mir arbeiten oder mir Feedback geben?</p>
     <p>📧 <strong>Email:</strong> <a href="mailto:sedin.mulasalihovic@gmail.com">sedin.mulasalihovic@gmail.com</a><br>
-       💬 <strong>Discord:</strong> ccodex_404</p>
+       💬 <strong>Discord:</strong> CodeX</p>
   </section>
 
   <footer>
@@ -205,27 +213,9 @@
   </footer>
 
   <script>
-    const toggleButton = document.getElementById('mode-toggle');
-    const body = document.body;
-
-    // Lade den Modus aus localStorage (wenn vorhanden)
-    const savedMode = localStorage.getItem('mode');
-    if (savedMode === 'light') {
-      body.classList.add('light');
-      toggleButton.textContent = 'Dark Mode';
+    function toggleMode() {
+      document.body.classList.toggle("dark")
     }
-
-    toggleButton.addEventListener('click', () => {
-      body.classList.toggle('light');
-      if(body.classList.contains('light')) {
-        toggleButton.textContent = 'Dark Mode';
-        localStorage.setItem('mode', 'light');
-      } else {
-        toggleButton.textContent = 'Light Mode';
-        localStorage.setItem('mode', 'dark');
-      }
-    });
   </script>
-
 </body>
 </html>
