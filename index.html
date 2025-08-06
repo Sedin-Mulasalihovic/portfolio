@@ -62,12 +62,33 @@
       margin-top: 1.5rem;
     }
 
-    nav a {
-      margin: 0 1rem;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: bold;
-    }
+nav a {
+  position: relative;
+  margin: 0 1rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease, transform 0.3s ease;
+  transform-origin: left;
+}
+
+nav a:hover::after {
+  width: 100%;
+  transform: scaleX(1);
+}
+
 
     section, footer {
       padding: 2rem;
