@@ -38,21 +38,21 @@
       position: relative;
     }
 
-#typed-text {
-  font-size: 2.5rem;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 2.5s steps(30, end) forwards;
-  margin: 0 auto;
-}
+    .animated-name {
+      font-size: 2.5rem;
+      font-weight: bold;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+      margin: 0 auto;
+      line-height: 1.2;
+      word-wrap: break-word;
+    }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
 
     .mode-toggle {
       position: absolute;
@@ -82,20 +82,24 @@
       max-width: 900px;
       margin: auto;
     }
+.skill {
+  background-color: var(--card);
+  padding: 1rem;
+  border-radius: 8px;
+  flex: 1 1 100px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
 
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+.skill:hover {
+  transform: scale(1.1);
+  background-color: var(--accent);
+  color: #fff;
+  }
 
-    .skill {
-      background-color: var(--card);
-      padding: 1rem;
-      border-radius: 8px;
-      flex: 1 1 100px;
-      text-align: center;
-    }
 
     .projects {
       display: grid;
@@ -133,8 +137,8 @@
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
+      .animated-name {
+        font-size: 2rem;
       }
 
       nav a {
@@ -150,7 +154,10 @@
 </head>
 <body class="dark">
   <header>
-    <div id="typed-text">Sedin Mulasalihovic</div>
+    <h1 class="animated-name">
+      <span class="first-name">Sedin</span><br>
+      <span class="last-name">Mulasalihovic</span>
+    </h1>
     <button class="mode-toggle" onclick="toggleMode()">Light/Dark</button>
     <nav>
       <a href="#about">Über mich</a>
@@ -166,17 +173,18 @@
     <p>Ich habe viele praktische Erfahrungen gesammelt und eigene Projekte umgesetzt, die mir geholfen haben, mein Wissen stetig zu erweitern und meine Fähigkeiten zu verbessern. Mein Ziel ist es, spannende Anwendungen zu entwickeln und mit der Community zu teilen.</p>
   </section>
 
-  <section id="skills">
-    <h2>Meine Skills</h2>
-    <div class="skills">
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">Python</div>
-      <div class="skill">Bash</div>
-      <div class="skill">C#</div>
-    </div>
-  </section>
+<section id="skills">
+  <h2>Meine Skills</h2>
+  <div class="skills">
+    <div class="skill">HTML</div>
+    <div class="skill">CSS</div>
+    <div class="skill">JavaScript</div>
+    <div class="skill">Python</div>
+    <div class="skill">Bash</div>
+    <div class="skill">C#</div>
+  </div>
+</section>
+
 
   <section id="projects">
     <h2>Projekte</h2>
