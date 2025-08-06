@@ -38,26 +38,21 @@
       position: relative;
     }
 
-    #typed-text {
-      font-size: 2.5rem;
-      font-weight: bold;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid var(--accent);
-      width: 0;
-      animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
-      margin: 0 auto;
-    }
+#typed-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 2.5s steps(30, end) forwards;
+  margin: 0 auto;
+}
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
 
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: var(--accent) }
-    }
 
     .mode-toggle {
       position: absolute;
@@ -194,9 +189,9 @@
       </div>
       <div class="project">
         <h3>Discord Bot</h3>
-        <img src="https://via.placeholder.com/300x200" alt="Screenshot Projekt 2" />
+        <img src="codexbot.png" alt="Screenshot Projekt 2" />
         <p>Ein nützlicher Bot mit Levelsystem und Commands.</p>
-        <a href="#" class="button">GitHub Repo</a>
+        <a href="https://github.com/Sedin-Mulasalihovic/CodeXBot" class="button">GitHub Repo</a>
       </div>
     </div>
   </section>
