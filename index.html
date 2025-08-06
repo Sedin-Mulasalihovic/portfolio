@@ -10,12 +10,23 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #121212;
       color: #f0f0f0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Light Mode */
+    body.light {
+      background-color: #f0f0f0;
+      color: #121212;
     }
 
     header {
       background-color: #1e1e1e;
       padding: 2rem;
       text-align: center;
+      transition: background-color 0.3s;
+    }
+    body.light header {
+      background-color: #ddd;
     }
 
     header h1 {
@@ -31,12 +42,17 @@
       margin: 0 1rem;
       color: #80cbc4;
       text-decoration: none;
+      transition: color 0.3s;
+    }
+    body.light nav a {
+      color: #00796b;
     }
 
     section {
       padding: 2rem;
       max-width: 900px;
       margin: auto;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .skills {
@@ -51,6 +67,11 @@
       border-radius: 8px;
       flex: 1 1 100px;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.light .skill {
+      background-color: #e0e0e0;
+      color: #121212;
     }
 
     .projects {
@@ -63,6 +84,11 @@
       background-color: #1f1f1f;
       padding: 1rem;
       border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.light .project {
+      background-color: #e0e0e0;
+      color: #121212;
     }
 
     .project img {
@@ -75,6 +101,11 @@
       padding: 2rem;
       background-color: #1e1e1e;
       margin-top: 3rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.light footer {
+      background-color: #ddd;
+      color: #121212;
     }
 
     a.button {
@@ -85,10 +116,35 @@
       padding: 0.5rem 1rem;
       border-radius: 6px;
       text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    a.button:hover {
+      background-color: #4db6ac;
+    }
+
+    /* Switcher Button */
+    #mode-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: #80cbc4;
+      border: none;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #000;
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+    #mode-toggle:hover {
+      background-color: #4db6ac;
     }
   </style>
 </head>
 <body>
+
+  <button id="mode-toggle">Light Mode</button>
 
   <header>
     <h1>Sedin Mulasalihovic</h1>
@@ -102,7 +158,9 @@
 
   <section id="about">
     <h2>Über mich</h2>
-    <p>Ich bin ein 15-jähriger Entwickler mit Leidenschaft für Webentwicklung, Discord-Bots und kreatives Coden. Ich arbeite mit HTML, CSS, JavaScript, etwas Python, Bash und C#.</p>
+    <p>Ich bin ein 15-jähriger Entwickler mit großer Leidenschaft für Webentwicklung, Discord-Bots und kreatives Programmieren. Seit über 4 Jahren beschäftige ich mich intensiv mit verschiedenen Programmiersprachen wie HTML, CSS, JavaScript, Python, Bash und C#.</p>
+    <p>In dieser Zeit habe ich viele praktische Erfahrungen gesammelt und erfolgreich eigene Projekte umgesetzt, die mir geholfen haben, mein Wissen stetig zu erweitern und meine Fähigkeiten zu verbessern.
+      Mein Ziel ist es, weiterhin spannende Anwendungen zu entwickeln, mich kontinuierlich weiterzubilden und meine Projekte mit der Community zu teilen.</p>
   </section>
 
   <section id="skills">
@@ -122,9 +180,9 @@
     <div class="projects">
       <div class="project">
         <h3>Portfolio Webseite</h3>
-        <img src="https://via.placeholder.com/300x200" alt="Screenshot Projekt 1" />
+        <img src="WebScreen.png" alt="Screenshot Projekt 1" />
         <p>Meine eigene Portfolio-Webseite mit HTML, CSS & JS.</p>
-        <a href="#" class="button">Live ansehen</a>
+        <a href="https://sedin-mulasalihovic.github.io/portfolio/" class="button">Live ansehen</a>
       </div>
       <div class="project">
         <h3>Discord Bot</h3>
@@ -132,20 +190,42 @@
         <p>Ein nützlicher Bot mit Levelsystem und Commands.</p>
         <a href="#" class="button">GitHub Repo</a>
       </div>
-      <!-- Weitere Projekte kannst du hier einfügen -->
     </div>
   </section>
 
   <section id="contact">
     <h2>Kontakt</h2>
     <p>Du willst mit mir arbeiten oder mir Feedback geben?</p>
-    <p>📧 <strong>Email:</strong> <a href="sedin.mulasalihovic@gmail.com">sedin.mulasalihovic@gmail.com</a><br>
-       💬 <strong>Discord:</strong> CodeX</p>
+    <p>📧 <strong>Email:</strong> <a href="mailto:sedin.mulasalihovic@gmail.com">sedin.mulasalihovic@gmail.com</a><br>
+       💬 <strong>Discord:</strong> ccodex_404</p>
   </section>
 
   <footer>
     <p>&copy; 2025 Sedin Mulasalihovic</p>
   </footer>
+
+  <script>
+    const toggleButton = document.getElementById('mode-toggle');
+    const body = document.body;
+
+    // Lade den Modus aus localStorage (wenn vorhanden)
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'light') {
+      body.classList.add('light');
+      toggleButton.textContent = 'Dark Mode';
+    }
+
+    toggleButton.addEventListener('click', () => {
+      body.classList.toggle('light');
+      if(body.classList.contains('light')) {
+        toggleButton.textContent = 'Dark Mode';
+        localStorage.setItem('mode', 'light');
+      } else {
+        toggleButton.textContent = 'Light Mode';
+        localStorage.setItem('mode', 'dark');
+      }
+    });
+  </script>
 
 </body>
 </html>
