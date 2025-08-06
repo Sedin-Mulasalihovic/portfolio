@@ -36,10 +36,6 @@
       padding: 3rem 2rem 2rem;
       text-align: center;
       position: relative;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease-out forwards;
-      animation-delay: 0.2s;
     }
 
     .animated-name {
@@ -77,22 +73,6 @@
       padding: 2rem;
       max-width: 900px;
       margin: auto;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease-out forwards;
-    }
-
-    section:nth-of-type(1) { animation-delay: 0.4s; }
-    section:nth-of-type(2) { animation-delay: 0.6s; }
-    section:nth-of-type(3) { animation-delay: 0.8s; }
-    section:nth-of-type(4) { animation-delay: 1s; }
-    footer { animation-delay: 1.2s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .skills {
@@ -155,14 +135,22 @@
       text-decoration: none;
     }
 
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 600px) {
       .animated-name {
         font-size: 2rem;
-      }
-
-      .animated-name::after {
-        content: "";
-        display: block;
+        display: inline-block;
+        word-break: break-word;
       }
 
       nav a {
@@ -173,16 +161,11 @@
       .skills {
         flex-direction: column;
       }
-
-      .animated-name {
-        display: inline-block;
-        word-break: break-word;
-      }
     }
   </style>
 </head>
 <body class="dark">
-  <header>
+  <header class="fade-in">
     <h1 class="animated-name">Sedin<wbr> Mulasalihovic</h1>
     <button class="mode-toggle" onclick="toggleMode()">Light/Dark</button>
     <nav>
@@ -193,7 +176,7 @@
     </nav>
   </header>
 
-  <section id="about">
+  <section id="about" class="fade-in">
     <h2>Über mich</h2>
     <p>Ich bin ein 15-jähriger Entwickler mit großer Leidenschaft für Webentwicklung, Discord-Bots und kreatives Programmieren. Seit über 4 Jahren beschäftige ich mich intensiv mit HTML, CSS, JavaScript, Python, Bash und C#.</p>
     <p>Durch das ständige Arbeiten an eigenen Projekten konnte ich mein technisches Wissen vertiefen und praxisnah anwenden. Ich interessiere mich besonders für moderne Webtechnologien, Automatisierungen und Benutzererlebnisse, die nicht nur funktionieren, sondern auch begeistern.</p>
@@ -201,7 +184,7 @@
     <p>Mein Ziel ist es, stetig zu lernen, mich weiterzuentwickeln und gemeinsam mit anderen an spannenden Projekten zu arbeiten. Ich freue mich immer über neue Herausforderungen, Feedback und den Austausch mit anderen Entwicklern und kreativen Köpfen.</p>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="fade-in">
     <h2>Meine Skills</h2>
     <div class="skills">
       <div class="skill">HTML</div>
@@ -213,7 +196,7 @@
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="fade-in">
     <h2>Projekte</h2>
     <div class="projects">
       <div class="project">
@@ -231,14 +214,14 @@
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="fade-in">
     <h2>Kontakt</h2>
     <p>Du willst mit mir arbeiten oder mir Feedback geben?</p>
     <p>📧 <strong>Email:</strong> <a href="mailto:sedin.mulasalihovic@gmail.com">sedin.mulasalihovic@gmail.com</a><br>
        💬 <strong>Discord:</strong> ccodex_404</p>
   </section>
 
-  <footer>
+  <footer class="fade-in">
     <p>&copy; 2025 Sedin Mulasalihovic</p>
   </footer>
 
@@ -246,6 +229,18 @@
     function toggleMode() {
       document.body.classList.toggle("dark")
     }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible")
+        }
+      })
+    }, {
+      threshold: 0.1
+    })
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
   </script>
 </body>
 </html>
