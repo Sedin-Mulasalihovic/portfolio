@@ -36,22 +36,18 @@
       padding: 3rem 2rem 2rem;
       text-align: center;
       position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+      animation-delay: 0.2s;
     }
 
     .animated-name {
       font-size: 2.5rem;
       font-weight: bold;
-      opacity: 0;
-      animation: fadeIn 2s ease-in-out forwards;
       margin: 0 auto;
       line-height: 1.2;
       word-wrap: break-word;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
     }
 
     .mode-toggle {
@@ -77,10 +73,33 @@
       font-weight: bold;
     }
 
-    section {
+    section, footer {
       padding: 2rem;
       max-width: 900px;
       margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    section:nth-of-type(1) { animation-delay: 0.4s; }
+    section:nth-of-type(2) { animation-delay: 0.6s; }
+    section:nth-of-type(3) { animation-delay: 0.8s; }
+    section:nth-of-type(4) { animation-delay: 1s; }
+    footer { animation-delay: 1.2s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
     }
 
     .skill {
@@ -91,7 +110,7 @@
       text-align: center;
       font-weight: bold;
       font-size: 1.1rem;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
 
@@ -99,6 +118,7 @@
       transform: scale(1.1);
       background-color: var(--accent);
       color: #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .projects {
@@ -121,7 +141,6 @@
 
     footer {
       text-align: center;
-      padding: 2rem;
       background-color: var(--card);
       margin-top: 3rem;
     }
@@ -141,6 +160,11 @@
         font-size: 2rem;
       }
 
+      .animated-name::after {
+        content: "";
+        display: block;
+      }
+
       nav a {
         display: block;
         margin: 0.5rem 0;
@@ -148,6 +172,11 @@
 
       .skills {
         flex-direction: column;
+      }
+
+      .animated-name {
+        display: inline-block;
+        word-break: break-word;
       }
     }
   </style>
@@ -164,17 +193,13 @@
     </nav>
   </header>
 
-<section id="about">
-  <h2>Über mich</h2>
-  <p>Ich bin ein 15-jähriger Entwickler mit großer Leidenschaft für Webentwicklung, Discord-Bots und kreatives Programmieren. Seit über 4 Jahren beschäftige ich mich intensiv mit HTML, CSS, JavaScript, Python, Bash und C#.</p>
-  
-  <p>Durch das ständige Arbeiten an eigenen Projekten konnte ich mein technisches Wissen vertiefen und praxisnah anwenden. Ich interessiere mich besonders für moderne Webtechnologien, Automatisierungen und Benutzererlebnisse, die nicht nur funktionieren, sondern auch begeistern.</p>
-  
-  <p>Ich arbeite gern an realen Lösungen für alltägliche Probleme, sei es durch die Entwicklung funktionaler Discord-Bots, dynamischer Webseiten oder individueller Tools. Dabei lege ich großen Wert auf sauberen, wartbaren Code und ein ansprechendes Design.</p>
-
-  <p>Mein Ziel ist es, stetig zu lernen, mich weiterzuentwickeln und gemeinsam mit anderen an spannenden Projekten zu arbeiten. Ich freue mich immer über neue Herausforderungen, Feedback und den Austausch mit anderen Entwicklern und kreativen Köpfen.</p>
-</section>
-
+  <section id="about">
+    <h2>Über mich</h2>
+    <p>Ich bin ein 15-jähriger Entwickler mit großer Leidenschaft für Webentwicklung, Discord-Bots und kreatives Programmieren. Seit über 4 Jahren beschäftige ich mich intensiv mit HTML, CSS, JavaScript, Python, Bash und C#.</p>
+    <p>Durch das ständige Arbeiten an eigenen Projekten konnte ich mein technisches Wissen vertiefen und praxisnah anwenden. Ich interessiere mich besonders für moderne Webtechnologien, Automatisierungen und Benutzererlebnisse, die nicht nur funktionieren, sondern auch begeistern.</p>
+    <p>Ich arbeite gern an realen Lösungen für alltägliche Probleme, sei es durch die Entwicklung funktionaler Discord-Bots, dynamischer Webseiten oder individueller Tools. Dabei lege ich großen Wert auf sauberen, wartbaren Code und ein ansprechendes Design.</p>
+    <p>Mein Ziel ist es, stetig zu lernen, mich weiterzuentwickeln und gemeinsam mit anderen an spannenden Projekten zu arbeiten. Ich freue mich immer über neue Herausforderungen, Feedback und den Austausch mit anderen Entwicklern und kreativen Köpfen.</p>
+  </section>
 
   <section id="skills">
     <h2>Meine Skills</h2>
