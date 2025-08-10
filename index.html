@@ -3,191 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
   <title>Sedin Mulasalihovic – Portfolio</title>
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #121212;
-      --card: #f0f0f0;
-      --accent: #00796b;
-    }
-
-    body.dark {
-      --bg: #121212;
-      --text: #f0f0f0;
-      --card: #1e1e1e;
-      --accent: #80cbc4;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-    }
-
-    header {
-      background-color: var(--card);
-      padding: 3rem 2rem 2rem;
-      text-align: center;
-      position: relative;
-    }
-
-    .animated-name {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin: 0 auto;
-      line-height: 1.2;
-      word-wrap: break-word;
-    }
-
-    .mode-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    nav {
-      margin-top: 1.5rem;
-    }
-
-nav a {
-  position: relative;
-  margin: 0 1rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  padding-bottom: 4px;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0%;
-  height: 2px;
-  background-color: var(--accent);
-  transition: width 0.3s ease, transform 0.3s ease;
-  transform-origin: left;
-}
-
-nav a:hover::after {
-  width: 100%;
-  transform: scaleX(1);
-}
-
-
-    section, footer {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .skill {
-      background-color: var(--card);
-      padding: 1rem;
-      border-radius: 8px;
-      flex: 1 1 100px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .skill:hover {
-      transform: scale(1.1);
-      background-color: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project {
-      background-color: var(--card);
-      padding: 1rem;
-      border-radius: 8px;
-    }
-
-    .project img {
-      width: 100%;
-      border-radius: 6px;
-      object-fit: cover;
-    }
-
-    footer {
-      text-align: center;
-      background-color: var(--card);
-      margin-top: 3rem;
-    }
-
-    a.button {
-      display: inline-block;
-      margin-top: 1rem;
-      background-color: var(--accent);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 600px) {
-      .animated-name {
-        font-size: 2rem;
-        display: inline-block;
-        word-break: break-word;
-      }
-
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
-      }
-
-      .skills {
-        flex-direction: column;
-      }
-    }
-  </style>
 </head>
 <body class="dark">
   <header class="fade-in">
-    <h1 class="animated-name">Sedin<wbr> Mulasalihovic</h1>
+    <h1 class="animated-name">Sedin<wbr> Mulasalihovic</wbr></h1>
     <button class="mode-toggle" onclick="toggleMode()">Light/Dark</button>
     <nav>
       <a href="#about">Über mich</a>
@@ -223,15 +44,15 @@ nav a:hover::after {
     <div class="projects">
       <div class="project">
         <h3>Portfolio Webseite</h3>
-        <img src="WebScreen.png" alt="Screenshot Projekt 1" />
+        <img src="images/WebScreen.png" alt="Screenshot Projekt 1" />
         <p>Meine eigene Portfolio-Webseite mit HTML, CSS & JS.</p>
         <a href="https://sedin-mulasalihovic.github.io/portfolio/" class="button">Live ansehen</a>
       </div>
       <div class="project">
         <h3>Discord Bot</h3>
-        <img src="codexbot.png" alt="Screenshot Projekt 2" />
+        <img src="/images/codexbot.png" alt="Screenshot Projekt 2" />
         <p>Ein nützlicher Bot mit Levelsystem und Commands.</p>
-        <a href="https://github.com/Sedin-Mulasalihovic/CodeXBot" class="button">GitHub Repo</a>
+        <a href="https://github.com/Sedin-Mulasalihovic/CodeXdc" class="button">GitHub Repo</a>
       </div>
     </div>
   </section>
