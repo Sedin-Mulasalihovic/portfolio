@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sedin Mulasalihovic – Portfolio</title>
     <style>
-      /* ========== PORTFOLIO STYLE ========== */
       :root {
         --bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         --text: #e9f7ff;
@@ -227,6 +226,7 @@
         }
       }
 
+      /* === PARTICLE BACKGROUND === */
       #particles {
         position: fixed;
         inset: 0;
@@ -235,6 +235,7 @@
         z-index: -1;
         pointer-events: none;
       }
+      /* === CUSTOM CURSOR === */
       .cursor {
         width: 14px;
         height: 14px;
@@ -251,6 +252,7 @@
         width: 32px;
         height: 32px;
       }
+      /* === LOADER === */
       #loader {
         position: fixed;
         inset: 0;
@@ -273,7 +275,6 @@
           transform: rotate(360deg);
         }
       }
-
       /* Continue Button for Mobile */
       #continue-btn {
         font-size: 1.2rem;
@@ -291,8 +292,6 @@
       #continue-btn:hover {
         background: var(--accent-light);
       }
-
-      /* Show button only on touch devices */
       @media (pointer: coarse) {
         #continue-btn {
           display: inline-block;
@@ -326,14 +325,116 @@
       <button id="continue-btn">Weiter</button>
     </div>
 
-    <!-- Portfolio Header & Sections ... same as before ... -->
+    <!-- PAGE LOADER -->
+    <div id="loader" aria-hidden="true"><div></div></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+    <!-- PARTICLE BACKGROUND -->
+    <canvas id="particles"></canvas>
+
+    <!-- PORTFOLIO HEADER & SECTIONS -->
+    <header class="fade-in">
+      <h1>Sedin Mulasalihovic</h1>
+      <button class="mode-toggle" id="modeToggle">Light/Dark</button>
+      <nav>
+        <a href="#about">Über mich</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projekte</a>
+        <a href="#contact">Kontakt</a>
+        <a href="https://github.com/Sedin-Mulasalihovic">GitHub</a>
+      </nav>
+    </header>
+
+    <section id="about" class="fade-in">
+      <h2>Über mich</h2>
+      <p>
+        Ich bin ein 15-jähriger Entwickler mit Leidenschaft für Webentwicklung,
+        Discord-Bots und kreative Softwareprojekte. Seit über 4 Jahren
+        beschäftige ich mich mit HTML, CSS, JavaScript, Python, Bash und C#.
+      </p>
+      <p>
+        Ich arbeite an echten Projekten, verbessere ständig meinen Code und
+        liebe moderne Technologien und automatisierte Systeme.
+      </p>
+      <p>
+        Mein Ziel ist es, hochwertige digitale Erlebnisse zu schaffen und mich
+        ständig weiterzuentwickeln.
+      </p>
+    </section>
+
+    <section id="skills" class="fade-in">
+      <h2>Meine Skills</h2>
+      <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Python</div>
+        <div class="skill">Bash</div>
+        <div class="skill">C#</div>
+      </div>
+    </section>
+
+    <section id="projects" class="fade-in">
+      <h2>Projekte</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>Portfolio Webseite</h3>
+          <img src="images/WebScreen.png" alt="Portfolio Screenshot" />
+          <p>Moderne Portfolio-Seite mit HTML, CSS und JS.</p>
+          <a
+            class="button"
+            href="https://sedin-mulasalihovic.github.io/portfolio/"
+            >Live ansehen</a
+          >
+        </div>
+        <div class="project">
+          <h3>Discord Bot</h3>
+          <img src="images/codexbot.png" alt="Discord Bot Screenshot" />
+          <p>Bot mit Levelsystem & Commands.</p>
+          <a
+            class="button"
+            href="https://github.com/Sedin-Mulasalihovic/CodeXdc"
+            >GitHub Repo</a
+          >
+        </div>
+        <div class="project">
+          <h3>ByteAlchemy</h3>
+          <img src="images/ba.png" alt="ByteAlchemy Screenshot" />
+          <p>Out now!</p>
+          <a
+            class="button"
+            href="https://sedin-mulasalihovic.github.io/ByteAlchemy/"
+            >ByteAlchemy</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <h2>Kontakt</h2>
+      <p>
+        📧 <strong>Email:</strong>
+        <a href="mailto:sedin.mulasalihovic@gmail.com"
+          >sedin.mulasalihovic@gmail.com</a
+        >
+      </p>
+      <p>💬 <strong>Discord:</strong> ccodex_404</p>
+    </section>
+
+    <footer class="fade-in">
+      <p>&copy; 2025 Sedin Mulasalihovic</p>
+    </footer>
 
     <script>
+      // Dark/Light mode toggle
       const modeToggle = document.getElementById("modeToggle");
       modeToggle.addEventListener("click", () =>
         document.body.classList.toggle("dark")
       );
 
+      // Loader
       window.addEventListener("load", () => {
         const loader = document.getElementById("loader");
         setTimeout(() => {
@@ -343,6 +444,7 @@
         }, 750);
       });
 
+      // Custom Cursor
       const cursor = document.getElementById("cursor");
       document.addEventListener("mousemove", (e) => {
         cursor.style.left = e.clientX + "px";
@@ -353,9 +455,66 @@
         el.addEventListener("mouseleave", () => cursor.classList.remove("big"));
       });
 
-      // Particles & IntersectionObserver same as before ...
+      // Particles
+      (function () {
+        const canvas = document.getElementById("particles");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        let W = (canvas.width = window.innerWidth),
+          H = (canvas.height = window.innerHeight),
+          particles = [];
+        const PARTICLE_COUNT = Math.min(110, Math.floor((W * H) / 8000));
+        function createParticles() {
+          particles.length = 0;
+          for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push({
+              x: Math.random() * W,
+              y: Math.random() * H,
+              r: Math.random() * 2 + 0.6,
+              vx: (Math.random() - 0.5) * 0.6,
+              vy: (Math.random() - 0.5) * 0.6,
+            });
+          }
+        }
+        function resize() {
+          W = canvas.width = window.innerWidth;
+          H = canvas.height = window.innerHeight;
+          createParticles();
+        }
+        window.addEventListener("resize", resize);
+        createParticles();
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          for (let p of particles) {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < -10) p.x = W + 10;
+            if (p.x > W + 10) p.x = -10;
+            if (p.y < -10) p.y = H + 10;
+            if (p.y > H + 10) p.y = -10;
+            ctx.beginPath();
+            ctx.fillStyle = "rgba(78,243,195,0.55)";
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+      })();
 
-      // Terminal Intro
+      // Fade-in observer
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll(".fade-in").forEach((el) => obs.observe(el));
+
+      // Terminal intro
       const terminal = document.getElementById("terminal-box");
       const intro = document.getElementById("intro-screen");
       const btnContinue = document.getElementById("continue-btn");
@@ -375,7 +534,6 @@
         }
       }
       typeLine();
-
       function hideIntro() {
         intro.style.transition = "opacity 1s ease";
         intro.style.opacity = "0";
