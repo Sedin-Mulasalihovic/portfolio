@@ -1,552 +1,274 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sedin Mulasalihovic – Portfolio</title>
+    <title>Countdown – Portfolio Updates</title>
+
     <style>
       :root {
         --bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         --text: #e9f7ff;
-        --card: rgba(255, 255, 255, 0.06);
         --accent: #4ef3c3;
         --accent-light: #8affdf;
-        --glass: rgba(255, 255, 255, 0.15);
-        --blur: blur(12px);
+        --glass: rgba(255, 255, 255, 0.12);
+        --blur: blur(14px);
       }
+
       body.dark {
         --bg: linear-gradient(135deg, #000000, #1b1b1b, #262626);
         --text: #e7e7e7;
-        --card: rgba(255, 255, 255, 0.07);
-        --accent: #4ef3c3;
-        --accent-light: #8affdf;
-        --glass: rgba(255, 255, 255, 0.1);
-        --blur: blur(14px);
+        --glass: rgba(255, 255, 255, 0.08);
       }
+
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+
       html {
         scroll-behavior: smooth;
       }
+
       body {
         font-family: "Segoe UI", sans-serif;
         background: var(--bg);
-        background-attachment: fixed;
         color: var(--text);
-        transition: background 0.6s ease, color 0.3s ease;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+        transition: 0.4s;
+        overflow-x: hidden;
       }
 
+      /* === NAV === */
       header {
-        padding: 4rem 2rem 3rem;
-        text-align: center;
-        position: relative;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
         backdrop-filter: var(--blur);
         background: var(--glass);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      h1 {
-        font-size: 3.5rem;
-        font-weight: 900;
-        letter-spacing: 2px;
-        text-shadow: 0 0 15px rgba(78, 243, 195, 0.4);
-        animation: glow 4s infinite ease-in-out;
-      }
-      @keyframes glow {
-        0% {
-          text-shadow: 0 0 8px rgba(78, 243, 195, 0.3);
-        }
-        50% {
-          text-shadow: 0 0 20px rgba(78, 243, 195, 0.7);
-        }
-        100% {
-          text-shadow: 0 0 8px rgba(78, 243, 195, 0.3);
-        }
-      }
-      .mode-toggle {
-        position: absolute;
-        right: 1.5rem;
-        top: 1.5rem;
-        padding: 0.6rem 1.2rem;
-        border: none;
-        border-radius: 10px;
-        background: var(--accent);
-        color: #000;
-        cursor: pointer;
-        font-weight: bold;
-        transition: 0.3s;
-        box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-      }
-      .mode-toggle:hover {
-        background: var(--accent-light);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       nav {
-        margin-top: 2rem;
+        max-width: 1100px;
+        margin: auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
+
       nav a {
         color: var(--accent);
-        font-weight: 600;
-        margin: 0 1rem;
+        font-weight: 700;
         text-decoration: none;
-        position: relative;
-        padding-bottom: 4px;
+        margin-right: 1.4rem;
         transition: 0.3s;
-        font-size: 1.05rem;
       }
+
       nav a:hover {
         color: var(--accent-light);
       }
-      nav a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0%;
-        height: 2px;
+
+      button {
         background: var(--accent);
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
         transition: 0.3s;
       }
-      nav a:hover::after {
-        width: 100%;
+
+      button:hover {
         background: var(--accent-light);
       }
 
+      /* === SECTIONS === */
       section {
         max-width: 1000px;
         margin: auto;
-        padding: 3.2rem 1.5rem;
-        backdrop-filter: var(--blur);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.02),
-          rgba(255, 255, 255, 0.01)
-        );
-        border-radius: 16px;
-        box-shadow: 0 8px 40px rgba(2, 6, 23, 0.45);
-        margin-top: 2.4rem;
-        border: 1px solid rgba(255, 255, 255, 0.03);
-      }
-      h2 {
-        font-size: 2.2rem;
-        margin-bottom: 1.2rem;
-        text-align: center;
-        letter-spacing: 1px;
-        text-shadow: 0 0 12px rgba(78, 243, 195, 0.18);
-      }
-      .skills {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
-      .skill {
-        background: rgba(255, 255, 255, 0.03);
-        padding: 0.85rem 1.2rem;
-        border-radius: 12px;
-        font-weight: 700;
-        transition: 0.28s ease;
-        box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5);
-        cursor: pointer;
-        backdrop-filter: blur(8px);
-      }
-      .skill:hover {
-        background: var(--accent);
-        color: #001;
-        transform: translateY(-6px) scale(1.04);
-        box-shadow: 0 10px 30px rgba(78, 243, 195, 0.22);
-      }
-      .projects {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.6rem;
-      }
-      .project {
-        background: rgba(255, 255, 255, 0.03);
-        padding: 1.4rem;
-        border-radius: 14px;
-        box-shadow: 0 6px 24px rgba(2, 6, 23, 0.45);
-        transition: transform 0.45s ease, box-shadow 0.45s ease;
-        transform-style: preserve-3d;
-      }
-      .project:hover {
-        transform: rotateX(6deg) rotateY(-6deg) translateY(-6px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(78, 243, 195, 0.12);
-      }
-      .project img {
-        width: 100%;
-        border-radius: 12px;
-        margin-bottom: 0.9rem;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-      }
-      .button {
-        display: inline-block;
-        background: linear-gradient(90deg, var(--accent), var(--accent-light));
-        padding: 0.65rem 1.2rem;
-        border-radius: 10px;
-        text-decoration: none;
-        color: #001;
-        font-weight: 800;
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-      .button:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(78, 243, 195, 0.12);
-      }
-      footer {
-        text-align: center;
-        padding: 2rem;
-        background: transparent;
-        margin-top: 3rem;
-        color: rgba(255, 255, 255, 0.8);
-      }
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.9s ease-out, transform 0.9s ease-out;
-      }
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2.4rem;
-        }
-        nav a {
-          display: block;
-          margin: 0.5rem 0;
-        }
-        section {
-          padding: 2rem 1rem;
-        }
+        padding: 7rem 1.5rem 4rem;
       }
 
-      /* === PARTICLE BACKGROUND === */
-      #particles {
+      .card {
+        background: var(--glass);
+        backdrop-filter: var(--blur);
+        padding: 3rem 2.5rem;
+        border-radius: 22px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+
+      h1,
+      h2 {
+        text-shadow: 0 0 16px rgba(78, 243, 195, 0.6);
+        margin-bottom: 1rem;
+      }
+
+      .timer {
+        font-size: 2.4rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        margin-top: 1.4rem;
+      }
+
+      /* === INFO LIST === */
+      .updates {
+        text-align: left;
+        margin-top: 2rem;
+      }
+
+      .update {
+        padding: 1rem 1.2rem;
+        border-left: 3px solid var(--accent);
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 10px;
+      }
+
+      .update span {
+        color: var(--accent-light);
+        font-weight: 700;
+      }
+
+      canvas {
         position: fixed;
         inset: 0;
-        width: 100%;
-        height: 100%;
         z-index: -1;
-        pointer-events: none;
       }
-      /* === CUSTOM CURSOR === */
-      .cursor {
-        width: 14px;
-        height: 14px;
-        border: 2px solid var(--accent);
-        border-radius: 50%;
-        position: fixed;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        transition: transform 0.12s ease, width 0.18s, height 0.18s;
-        z-index: 9999;
-        mix-blend-mode: difference;
+
+      footer {
+        text-align: center;
+        opacity: 0.7;
+        padding: 2rem;
       }
-      .cursor.big {
-        width: 32px;
-        height: 32px;
-      }
-      /* === LOADER === */
-      #loader {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #000;
-        z-index: 99999;
-      }
-      #loader div {
-        width: 58px;
-        height: 58px;
-        border: 6px solid rgba(255, 255, 255, 0.08);
-        border-top-color: var(--accent);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      /* Continue Button for Mobile */
-      #continue-btn {
-        font-size: 1.2rem;
-        padding: 1rem 2rem;
-        cursor: pointer;
-        background: var(--accent);
-        border: none;
-        border-radius: 12px;
-        color: #000;
-        font-weight: bold;
-        transition: 0.3s;
-        margin-top: 20px;
-        display: none;
-      }
-      #continue-btn:hover {
-        background: var(--accent-light);
-      }
-      @media (pointer: coarse) {
-        #continue-btn {
-          display: inline-block;
+
+      @media (max-width: 600px) {
+        .timer {
+          font-size: 1.7rem;
         }
       }
     </style>
   </head>
+
   <body class="dark">
-    <!-- TERMINAL INTRO -->
-    <div
-      id="intro-screen"
-      style="
-        position: fixed;
-        inset: 0;
-        background: #000;
-        color: #4ef3c3;
-        font-family: monospace;
-        padding: 2rem;
-        z-index: 999999;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      "
-    >
-      <div
-        id="terminal-box"
-        style="max-width: 600px; font-size: 1.1rem; white-space: pre-line"
-      ></div>
-      <button id="continue-btn">Weiter</button>
-    </div>
-
-    <!-- PAGE LOADER -->
-    <div id="loader" aria-hidden="true"><div></div></div>
-
-    <!-- CUSTOM CURSOR -->
-    <div class="cursor" id="cursor" aria-hidden="true"></div>
-
-    <!-- PARTICLE BACKGROUND -->
     <canvas id="particles"></canvas>
 
-    <!-- PORTFOLIO HEADER & SECTIONS -->
-    <header class="fade-in">
-      <h1>Sedin Mulasalihovic</h1>
-      <button class="mode-toggle" id="modeToggle">Light/Dark</button>
+    <!-- NAV -->
+    <header>
       <nav>
-        <a href="#about">Über mich</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projekte</a>
-        <a href="#contact">Kontakt</a>
-        <a href="https://github.com/Sedin-Mulasalihovic">GitHub</a>
+        <div>
+          <a href="#countdown">Countdown</a>
+          <a href="#info">Info</a>
+        </div>
+        <button id="modeToggle">Light / Dark</button>
       </nav>
     </header>
 
-    <section id="about" class="fade-in">
-      <h2>Über mich</h2>
-      <p>
-        Ich bin ein 15-jähriger Entwickler mit Leidenschaft für Webentwicklung,
-        Discord-Bots und kreative Softwareprojekte. Seit über 4 Jahren
-        beschäftige ich mich mit HTML, CSS, JavaScript, Python, Bash und C#.
-      </p>
-      <p>
-        Ich arbeite an echten Projekten, verbessere ständig meinen Code und
-        liebe moderne Technologien und automatisierte Systeme.
-      </p>
-      <p>
-        Mein Ziel ist es, hochwertige digitale Erlebnisse zu schaffen und mich
-        ständig weiterzuentwickeln.
-      </p>
-    </section>
-
-    <section id="skills" class="fade-in">
-      <h2>Meine Skills</h2>
-      <div class="skills">
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">Python</div>
-        <div class="skill">Bash</div>
-        <div class="skill">C#</div>
+    <!-- COUNTDOWN -->
+    <section id="countdown">
+      <div class="card">
+        <h1>⏳ Countdown läuft</h1>
+        <p>Verbleibende Zeit bis zum Update</p>
+        <div class="timer" id="timer">Lädt...</div>
       </div>
     </section>
 
-    <section id="projects" class="fade-in">
-      <h2>Projekte</h2>
-      <div class="projects">
-        <div class="project">
-          <h3>Portfolio Webseite</h3>
-          <img src="images/WebScreen.png" alt="Portfolio Screenshot" />
-          <p>Moderne Portfolio-Seite mit HTML, CSS und JS.</p>
-          <a
-            class="button"
-            href="https://sedin-mulasalihovic.github.io/portfolio/"
-            >Live ansehen</a
-          >
-        </div>
-        <div class="project">
-          <h3>Discord Bot</h3>
-          <img src="images/codexbot.png" alt="Discord Bot Screenshot" />
-          <p>Bot mit Levelsystem & Commands.</p>
-          <a
-            class="button"
-            href="https://github.com/Sedin-Mulasalihovic/CodeXdc"
-            >GitHub Repo</a
-          >
-        </div>
-        <div class="project">
-          <h3>ByteAlchemy</h3>
-          <img src="images/ba.png" alt="ByteAlchemy Screenshot" />
-          <p>Out now!</p>
-          <a
-            class="button"
-            href="https://sedin-mulasalihovic.github.io/ByteAlchemy/"
-            >ByteAlchemy</a
-          >
+    <!-- INFO -->
+    <section id="info">
+      <div class="card">
+        <h2>ℹ️ Portfolio Updates</h2>
+        <p>Diese Features werden aktuell umgesetzt:</p>
+
+        <div class="updates">
+          <div class="update">
+            <span>✔ Neues Design:</span> Überarbeiteter Dark Mode & bessere
+            Animationen
+          </div>
+          <div class="update">
+            <span>✔ Performance:</span> Schnellere Ladezeiten & optimierter Code
+          </div>
+          <div class="update">
+            <span>✔ Projekte:</span> Neue Projekte + bessere Präsentation
+          </div>
+          <div class="update">
+            <span>✔ Sicherheit:</span> Verbesserte Struktur & sauberes JS
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="fade-in">
-      <h2>Kontakt</h2>
-      <p>
-        📧 <strong>Email:</strong>
-        <a
-          href="mailto:sedin.mulasalihovic@gmail.com"
-          style="color: white; text-decoration: none"
-        >
-          sedin.mulasalihovic@gmail.com
-        </a>
-      </p>
-      <p>💬 <strong>Discord:</strong> ccodex_404</p>
-    </section>
-
-    <footer class="fade-in">
-      <p>&copy; 2025 Sedin Mulasalihovic</p>
-    </footer>
+    <footer>© 2026 Sedin Mulasalihovic</footer>
 
     <script>
-      // Dark/Light mode toggle
-      const modeToggle = document.getElementById("modeToggle");
-      modeToggle.addEventListener("click", () =>
-        document.body.classList.toggle("dark")
-      );
+      // Dark Mode
+      document.getElementById("modeToggle").onclick = () =>
+        document.body.classList.toggle("dark");
 
-      // Loader
-      window.addEventListener("load", () => {
-        const loader = document.getElementById("loader");
-        setTimeout(() => {
-          loader.style.transition = "opacity 0.6s";
-          loader.style.opacity = "0";
-          setTimeout(() => loader.remove(), 650);
-        }, 750);
-      });
+      // === FIXER ENDZEITPUNKT ===
+      // 19.02 um 22:00 Uhr deutscher Zeit (MEZ = UTC+1)
+      const END_TIME = new Date("2026-02-19T21:00:00Z").getTime();
+      const timerEl = document.getElementById("timer");
 
-      // Custom Cursor
-      const cursor = document.getElementById("cursor");
-      document.addEventListener("mousemove", (e) => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-      });
-      document.querySelectorAll("a,button,.skill,.project").forEach((el) => {
-        el.addEventListener("mouseenter", () => cursor.classList.add("big"));
-        el.addEventListener("mouseleave", () => cursor.classList.remove("big"));
-      });
+      function updateTimer() {
+        const diff = END_TIME - Date.now();
 
-      // Particles
-      (function () {
-        const canvas = document.getElementById("particles");
-        if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-        let W = (canvas.width = window.innerWidth),
-          H = (canvas.height = window.innerHeight),
-          particles = [];
-        const PARTICLE_COUNT = Math.min(110, Math.floor((W * H) / 8000));
-        function createParticles() {
-          particles.length = 0;
-          for (let i = 0; i < PARTICLE_COUNT; i++) {
-            particles.push({
-              x: Math.random() * W,
-              y: Math.random() * H,
-              r: Math.random() * 2 + 0.6,
-              vx: (Math.random() - 0.5) * 0.6,
-              vy: (Math.random() - 0.5) * 0.6,
-            });
-          }
+        if (diff <= 0) {
+          timerEl.textContent = "⏰ Zeit abgelaufen";
+          return;
         }
-        function resize() {
-          W = canvas.width = window.innerWidth;
-          H = canvas.height = window.innerHeight;
-          createParticles();
-        }
-        window.addEventListener("resize", resize);
-        createParticles();
-        function draw() {
-          ctx.clearRect(0, 0, W, H);
-          for (let p of particles) {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < -10) p.x = W + 10;
-            if (p.x > W + 10) p.x = -10;
-            if (p.y < -10) p.y = H + 10;
-            if (p.y > H + 10) p.y = -10;
-            ctx.beginPath();
-            ctx.fillStyle = "rgba(78,243,195,0.55)";
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          requestAnimationFrame(draw);
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        timerEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 1000);
+
+      // === PARTICLES ===
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
+      let w, h, particles;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        particles = Array.from({ length: 100 }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 2 + 0.5,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+        }));
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(78,243,195,0.5)";
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
         }
         requestAnimationFrame(draw);
-      })();
-
-      // Fade-in observer
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("visible");
-          });
-        },
-        { threshold: 0.12 }
-      );
-      document.querySelectorAll(".fade-in").forEach((el) => obs.observe(el));
-
-      // Terminal intro
-      const terminal = document.getElementById("terminal-box");
-      const intro = document.getElementById("intro-screen");
-      const btnContinue = document.getElementById("continue-btn");
-      const lines = [
-        "Initializing Portfolio System...",
-        "Loading UI Components...",
-        "Establishing Secure Connection...",
-        "Welcome, User.",
-        "Press ENTER or tap Weiter to continue...",
-      ];
-      let i = 0;
-      function typeLine() {
-        if (i < lines.length) {
-          terminal.textContent += lines[i] + "\n";
-          i++;
-          setTimeout(typeLine, 600);
-        }
       }
-      typeLine();
-      function hideIntro() {
-        intro.style.transition = "opacity 1s ease";
-        intro.style.opacity = "0";
-        setTimeout(() => intro.remove(), 1000);
-      }
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") hideIntro();
-      });
-      btnContinue.addEventListener("click", hideIntro);
-      intro.addEventListener("touchstart", hideIntro);
+      draw();
     </script>
   </body>
 </html>
