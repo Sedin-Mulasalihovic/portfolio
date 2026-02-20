@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="de" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warum ich Python für Noder gewählt habe | Sedin Mulasalihovic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Outfit", "sans-serif"],
+              mono: ["Courier Prime", "monospace"], // Optional für Code
+            },
+            colors: {
+              bg: "#030014",
+              glass: "rgba(255, 255, 255, 0.03)",
+              glassBorder: "rgba(255, 255, 255, 0.08)",
+              accent: "#4ef3c3",
+              primary: "#7000ff",
+              secondary: "#00c6ff",
+            },
+            animation: {
+              blob: "blob 7s infinite",
+              "fade-in": "fadeIn 0.5s ease-out forwards",
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #030014;
+        color: white;
+        overflow-x: hidden;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+      /* Styling für den Blog Inhalt */
+      .blog-content h2 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+        color: #4ef3c3; /* Accent Color */
+      }
+      .blog-content p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .blog-content ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .blog-content li {
+        margin-bottom: 0.5rem;
+      }
+      .blog-content code {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-family: monospace;
+        color: #00c6ff;
+      }
+      .blog-content pre {
+        background: #0a0a0a;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 1.5rem;
+      }
+      .blog-content pre code {
+        background: transparent;
+        color: #e5e5e5;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body
+    class="antialiased selection:bg-accent selection:text-black relative opacity-0 animate-fade-in"
+  >
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"
+      ></div>
+    </div>
+
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-lg">
+      <div
+        class="glass-card rounded-full px-6 py-3 flex justify-between items-center shadow-2xl shadow-primary/10"
+      >
+        <a
+          href="index.html"
+          class="flex items-center gap-2 font-medium hover:text-accent transition-colors"
+        >
+          <i class="fa-solid fa-arrow-left"></i> Zurück zum Portfolio
+        </a>
+        <a
+          href="index.html"
+          class="font-bold text-xl tracking-tight hover:text-accent transition-colors"
+          >SM</a
+        >
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-6 pt-32 pb-20 max-w-4xl">
+      <header class="text-center mb-12">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-wider mb-6"
+        >
+          DevLog
+        </div>
+        <h1
+          class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight"
+        >
+          Warum ich Python für
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary"
+            >Noder</span
+          >
+          gewählt habe
+        </h1>
+        <div
+          class="flex justify-center items-center gap-6 text-sm text-white/50 font-mono"
+        >
+          <span><i class="fa-regular fa-calendar mr-2"></i>17. Feb 2026</span>
+          <span><i class="fa-regular fa-clock mr-2"></i>5 Min. Lesezeit</span>
+        </div>
+      </header>
+
+      <div class="glass-card p-2 rounded-2xl mb-12">
+        <div
+          class="w-full h-64 md:h-96 bg-black rounded-xl overflow-hidden relative"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1000&auto=format&fit=crop"
+            class="w-full h-full object-cover opacity-80"
+            alt="Code Screen"
+          />
+        </div>
+      </div>
+
+      <article class="glass-card rounded-3xl p-8 md:p-12 blog-content">
+        <p>
+          Als ich anfing, <strong>Noder</strong> zu entwickeln, stand ich vor
+          einer klassischen Entscheidung: Sollte ich eine kompilierte Sprache
+          wie C++ für maximale Geschwindigkeit nutzen oder eine interpretierte
+          Sprache wie Python?
+        </p>
+
+        <h2>Die Herausforderung</h2>
+        <p>
+          Mein Ziel war es, eine Notiz-App zu bauen, die direkt im Terminal von
+          Kali Linux läuft. Sie musste schnell sein, aber vor allem musste der
+          Development-Zyklus kurz sein.
+        </p>
+
+        <h2>Warum Python?</h2>
+        <ul>
+          <li>
+            <strong>Bibliotheken:</strong> Mit Libraries wie
+            <code>curses</code> oder <code>click</code> kann man extrem schnell
+            TUI (Text User Interfaces) bauen.
+          </li>
+          <li>
+            <strong>Lesbarkeit:</strong> Python Code ist fast wie Englisch zu
+            lesen.
+          </li>
+          <li>
+            <strong>Cross-Platform:</strong> Läuft auf Linux und Windows ohne
+            Neu-Kompilierung.
+          </li>
+        </ul>
+
+        <h2>Ein Code Beispiel</h2>
+        <p>
+          Hier ist ein kleiner Ausschnitt, wie ich die Speicherfunktion
+          umgesetzt habe:
+        </p>
+
+        <pre><code class="language-python">def save_note(title, content):
+    filename = f"{title}.txt"
+    with open(filename, "w") as f:
+        f.write(content)
+    print(f"Notiz {title} erfolgreich gespeichert!")</code></pre>
+
+        <h2>Fazit</h2>
+        <p>
+          Obwohl C++ schneller in der Ausführung ist, war Python schneller in
+          der Entwicklung. Für ein Tool wie Noder ist das der entscheidende
+          Faktor.
+        </p>
+      </article>
+
+      <div
+        class="mt-12 flex items-center gap-4 glass-card p-6 rounded-2xl max-w-2xl mx-auto"
+      >
+        <div
+          class="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center text-2xl"
+        >
+          👨‍💻
+        </div>
+        <div>
+          <h3 class="font-bold text-lg">Geschrieben von Sedin</h3>
+          <p class="text-white/60 text-sm">
+            Fullstack Developer & Linux Enthusiast. Ich schreibe über Code,
+            Tools und meine Projekte.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center py-8 text-white/40 text-sm font-mono">
+      <a href="blog-discord-bot.html" class="hover:text-accent"
+        >Nächster Blog</a
+      >
+      <p><strong>|</strong></p>
+      &copy; 2026 Sedin Mulasalihovic.
+      <a href="index.html" class="hover:text-accent">Zurück zur Startseite</a>
+    </footer>
+  </body>
+</html>

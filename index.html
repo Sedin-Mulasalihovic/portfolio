@@ -1,274 +1,595 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countdown – Portfolio Updates</title>
-
+    <title>Sedin Mulasalihovic | Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Outfit", "sans-serif"],
+            },
+            colors: {
+              bg: "#030014",
+              glass: "rgba(255, 255, 255, 0.03)",
+              glassBorder: "rgba(255, 255, 255, 0.08)",
+              accent: "#4ef3c3",
+              primary: "#7000ff",
+              secondary: "#00c6ff",
+            },
+            animation: {
+              blob: "blob 7s infinite",
+              "fade-in-up": "fadeInUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              fadeInUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      :root {
-        --bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        --text: #e9f7ff;
-        --accent: #4ef3c3;
-        --accent-light: #8affdf;
-        --glass: rgba(255, 255, 255, 0.12);
-        --blur: blur(14px);
-      }
-
-      body.dark {
-        --bg: linear-gradient(135deg, #000000, #1b1b1b, #262626);
-        --text: #e7e7e7;
-        --glass: rgba(255, 255, 255, 0.08);
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
       body {
-        font-family: "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        transition: 0.4s;
+        background-color: #030014;
+        color: white;
         overflow-x: hidden;
       }
-
-      /* === NAV === */
-      header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        backdrop-filter: var(--blur);
-        background: var(--glass);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       }
-
-      nav {
-        max-width: 1100px;
-        margin: auto;
-        padding: 1rem 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      .text-gradient {
+        background: linear-gradient(to right, #4ef3c3, #00c6ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
-
-      nav a {
-        color: var(--accent);
-        font-weight: 700;
-        text-decoration: none;
-        margin-right: 1.4rem;
-        transition: 0.3s;
+      #intro {
+        background: #030014;
+        z-index: 9999;
       }
-
-      nav a:hover {
-        color: var(--accent-light);
+      .loader-bar {
+        width: 0%;
+        height: 4px;
+        background: #4ef3c3;
+        transition: width 1.5s ease-in-out;
       }
-
-      button {
-        background: var(--accent);
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      button:hover {
-        background: var(--accent-light);
-      }
-
-      /* === SECTIONS === */
-      section {
-        max-width: 1000px;
-        margin: auto;
-        padding: 7rem 1.5rem 4rem;
-      }
-
-      .card {
-        background: var(--glass);
-        backdrop-filter: var(--blur);
-        padding: 3rem 2.5rem;
-        border-radius: 22px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        text-align: center;
-      }
-
-      h1,
-      h2 {
-        text-shadow: 0 0 16px rgba(78, 243, 195, 0.6);
-        margin-bottom: 1rem;
-      }
-
-      .timer {
-        font-size: 2.4rem;
-        font-weight: 900;
-        letter-spacing: 2px;
-        margin-top: 1.4rem;
-      }
-
-      /* === INFO LIST === */
-      .updates {
-        text-align: left;
-        margin-top: 2rem;
-      }
-
-      .update {
-        padding: 1rem 1.2rem;
-        border-left: 3px solid var(--accent);
-        margin-bottom: 1rem;
-        background: rgba(255, 255, 255, 0.04);
-        border-radius: 10px;
-      }
-
-      .update span {
-        color: var(--accent-light);
-        font-weight: 700;
-      }
-
-      canvas {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-      }
-
-      footer {
-        text-align: center;
-        opacity: 0.7;
-        padding: 2rem;
-      }
-
-      @media (max-width: 600px) {
-        .timer {
-          font-size: 1.7rem;
-        }
-      }
+      @media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
+  a, button {
+    cursor: none; /* Wichtig, damit der Hand-Zeiger nicht erscheint */
+  }
+}
     </style>
   </head>
-
-  <body class="dark">
-    <canvas id="particles"></canvas>
-
-    <!-- NAV -->
-    <header>
-      <nav>
-        <div>
-          <a href="#countdown">Countdown</a>
-          <a href="#info">Info</a>
-        </div>
-        <button id="modeToggle">Light / Dark</button>
-      </nav>
-    </header>
-
-    <!-- COUNTDOWN -->
-    <section id="countdown">
-      <div class="card">
-        <h1>⏳ Countdown läuft</h1>
-        <p>Verbleibende Zeit bis zum Update</p>
-        <div class="timer" id="timer">Lädt...</div>
+  <body class="antialiased selection:bg-accent selection:text-black relative">
+    <div id="cursor-dot" class="fixed w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden md:block"></div>
+<div id="cursor-outline" class="fixed w-8 h-8 border border-white/50 rounded-full pointer-events-none z-[9999] transition-transform duration-300 ease-out hidden md:block"></div>
+    <div
+      id="intro"
+      class="fixed inset-0 flex flex-col items-center justify-center transition-opacity duration-700"
+    >
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tighter">
+        <span class="text-white">Sedin</span
+        ><span class="text-accent">.dev</span>
+      </h1>
+      <div class="w-64 h-1 bg-white/10 rounded-full overflow-hidden">
+        <div id="loader-progress" class="loader-bar"></div>
       </div>
-    </section>
+      <p class="mt-2 text-white/50 font-mono text-sm">System loading...</p>
+    </div>
 
-    <!-- INFO -->
-    <section id="info">
-      <div class="card">
-        <h2>ℹ️ Portfolio Updates</h2>
-        <p>Diese Features werden aktuell umgesetzt:</p>
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute -bottom-32 left-1/3 w-96 h-96 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"
+      ></div>
+    </div>
 
-        <div class="updates">
-          <div class="update">
-            <span>✔ Neues Design:</span> Überarbeiteter Dark Mode & bessere
-            Animationen
-          </div>
-          <div class="update">
-            <span>✔ Performance:</span> Schnellere Ladezeiten & optimierter Code
-          </div>
-          <div class="update">
-            <span>✔ Projekte:</span> Neue Projekte + bessere Präsentation
-          </div>
-          <div class="update">
-            <span>✔ Sicherheit:</span> Verbesserte Struktur & sauberes JS
-          </div>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-lg">
+      <div
+        class="glass-card rounded-full px-6 py-3 flex justify-between items-center shadow-2xl shadow-primary/10"
+      >
+        <a
+          href="#"
+          class="font-bold text-xl tracking-tight hover:text-accent transition-colors"
+          >SM</a
+        >
+        <div class="flex gap-6 text-sm font-medium text-white/70">
+          <a href="#about" class="hover:text-white transition-colors"
+            >Über mich</a
+          >
+          <a href="#projects" class="hover:text-white transition-colors"
+            >Projekte</a
+          >
+          <a href="#contact" class="hover:text-white transition-colors"
+            >Kontakt</a
+          >
+          <a href="#blog" class="hover:text-white transition-colors"
+            >Blog</a>
         </div>
       </div>
-    </section>
+    </nav>
 
-    <footer>© 2026 Sedin Mulasalihovic</footer>
+    <main class="container mx-auto px-6 pt-40 pb-20">
+      <section
+        class="text-center mb-24 opacity-0 animate-fade-in-up"
+        style="animation-delay: 1.8s; animation-fill-mode: forwards"
+      >
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-wider mb-6 hover:bg-accent/20 transition-all cursor-default"
+        >
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 bg-accent"
+            ></span>
+          </span>
+          Open to Work
+        </div>
+        <h1
+          class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-tight"
+        >
+          Hi, ich bin <br />
+          <span class="text-gradient" id="typewriter"></span><span class="animate-pulse">_</span>
+        </h1>
+        <p
+          class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-10"
+        >
+          Ein 15-jähriger Entwickler mit Leidenschaft für Webtechnologien,
+          Discord-Bots und moderne Software. Ich baue digitale Erlebnisse, die
+          funktionieren.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a
+            href="https://github.com/Sedin-Mulasalihovic"
+            target="_blank"
+            class="glass-card p-4 rounded-full text-white hover:bg-white hover:text-black transition-all transform hover:-translate-y-1"
+          >
+            <i class="fa-brands fa-github text-xl"></i>
+          </a>
+          <a
+            href="mailto:sedin.mulasalihovic@gmail.com"
+            class="glass-card p-4 rounded-full text-white hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1"
+          >
+            <i class="fa-solid fa-envelope text-xl"></i>
+          </a>
+          <a
+            href="#contact"
+            class="glass-card p-4 rounded-full text-white hover:bg-[#5865F2] hover:text-white transition-all transform hover:-translate-y-1"
+          >
+            <i class="fa-brands fa-discord text-xl"></i>
+          </a>
+        </div>
+      </section>
+
+      <section id="about" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+        <div
+          class="md:col-span-2 glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group"
+        >
+          <div
+            class="absolute top-0 right-0 p-32 bg-primary/20 blur-[80px] rounded-full group-hover:bg-primary/30 transition-all"
+          ></div>
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <i class="fa-solid fa-user-astronaut text-accent"></i> Über mich
+          </h2>
+          <p class="text-white/70 leading-relaxed mb-4">
+            Seit über 4 Jahren beschäftige ich mich intensiv mit Code. Was als
+            Hobby begann, ist heute eine Leidenschaft für komplexe Systeme. Ich
+            beherrsche
+            <span class="text-accent font-semibold"
+              >HTML, CSS, JavaScript, Python, Bash & C#</span
+            >.
+          </p>
+          <p class="text-white/70 leading-relaxed">
+            Ich arbeite ständig an echten Projekten, verbessere meinen Workflow
+            und liebe es, Probleme durch Automatisierung und saubere Architektur
+            zu lösen.
+          </p>
+        </br>
+          <p class="text-white/70 leading-relaxed">
+            Alles hat angefangen mit einem Handy einem Huawei p20 lite. Ich habe
+            mir als erstes HTML, CSS und js beigebracht auf der seite Replit
+            dann mich später mit Linux beschäftigt und Kali Linux auf meinen
+            Handy zum laufen gebracht.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 relative overflow-hidden group">
+          <div
+            class="absolute bottom-0 left-0 p-24 bg-accent/10 blur-[60px] rounded-full group-hover:bg-accent/20 transition-all"
+          ></div>
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <i class="fa-solid fa-code text-secondary"></i> Skills
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >HTML5</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >CSS3</span
+            >
+                        <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >Java</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >JavaScript</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >Python</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >Bash</span
+            >
+                        <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >Linux</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >C#</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >Git</span
+            >
+            <span
+              class="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-sm hover:border-accent/50 hover:text-accent transition-colors cursor-default"
+              >VS Code</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="mb-24">
+        <h2 class="text-3xl font-bold mb-10 pl-2 border-l-4 border-accent">
+          Ausgewählte Projekte
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="glass-card rounded-2xl overflow-hidden group hover:border-accent/50 transition-all duration-300"
+          >
+            <div class="h-48 bg-black overflow-hidden relative">
+              <img
+                src=""
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80'
+                "
+                alt="Portfolio"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#030014] to-transparent opacity-80"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Noder</h3>
+              <p class="text-white/60 text-sm mb-4 line-clamp-2">
+                Noder ist eine einfache, terminalbasierte Notiz-App, geschrieben
+                in Python. Sie läuft direkt im Terminal (z. B. Kali Linux) und
+                bietet grundlegende Funktionen zum Erstellen, Anzeigen,
+                Durchsuchen und Löschen von Notizen – inklusive Passwortschutz.
+              </p>
+              <div class="flex gap-3">
+                <a
+                  href="https://github.com/Sedin-Mulasalihovic/noder"
+                  target="_blank"
+                  class="flex-1 text-center py-2 rounded-lg bg-accent text-black font-bold text-sm hover:bg-white transition-colors"
+                  >Github</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="glass-card rounded-2xl overflow-hidden group hover:border-accent/50 transition-all duration-300"
+          >
+            <div class="h-48 bg-black overflow-hidden relative">
+              <img
+                src="images/codexbot.png"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&w=800&q=80'
+                "
+                alt="Discord Bot"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#030014] to-transparent opacity-80"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Discord Bot</h3>
+              <p class="text-white/60 text-sm mb-4 line-clamp-2">
+                Ein fortschrittlicher Discord Bot mit Levelsystem,
+                Moderationstools und interaktiven Commands.
+              </p>
+              <div class="flex gap-3">
+                <a
+                  href="https://github.com/Sedin-Mulasalihovic/CodeXdc"
+                  target="_blank"
+                  class="flex-1 text-center py-2 rounded-lg bg-white/10 text-white font-bold text-sm hover:bg-white/20 transition-colors"
+                  >GitHub</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="glass-card rounded-2xl overflow-hidden group hover:border-accent/50 transition-all duration-300"
+          >
+            <div class="h-48 bg-black overflow-hidden relative">
+              <img
+                src="images/ba.png"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80'
+                "
+                alt="ByteAlchemy"
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#030014] to-transparent opacity-80"
+              ></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">ByteAlchemy</h3>
+              <p class="text-white/60 text-sm mb-4 line-clamp-2">
+                Ein kreatives Softwareprojekt, bereit zum Erkunden. Out now!
+              </p>
+              <div class="flex gap-3">
+                <a
+                  href="https://sedin-mulasalihovic.github.io/ByteAlchemy/"
+                  target="_blank"
+                  class="flex-1 text-center py-2 rounded-lg bg-accent text-black font-bold text-sm hover:bg-white transition-colors"
+                  >Ansehen</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contact"
+        class="max-w-3xl mx-auto text-center glass-card rounded-3xl p-10 border border-accent/20 relative overflow-hidden"
+      >
+        <div class="absolute inset-0 bg-accent/5 blur-3xl"></div>
+        <h2 class="text-3xl font-bold mb-6 relative z-10">
+          Bereit für etwas Neues?
+        </h2>
+        <p class="text-white/70 mb-8 relative z-10">
+          Hast du ein Projekt oder eine Idee? Schreib mir gerne eine Nachricht
+          via Email oder Discord.
+        </p>
+        <div
+          class="flex flex-col md:flex-row justify-center gap-4 relative z-10"
+        >
+          <a
+            href="mailto:sedin.mulasalihovic@gmail.com"
+            class="px-8 py-3 rounded-xl bg-accent text-black font-bold hover:bg-white hover:scale-105 transition-all"
+            >Email senden</a
+          >
+          <div
+            class="px-8 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-semibold flex items-center justify-center gap-2"
+          >
+            <i class="fa-brands fa-discord"></i> ccodex_404
+          </div>
+        </div>
+      </section>
+    </br>
+      <section id="blog" class="mb-24 scroll-mt-32">
+        <div class="flex flex-col">
+          <h2 class="text-3xl font-bold mb-10 pl-2 border-l-4 border-secondary">
+            Neues vom Schreibtisch
+          </h2>
+
+          <div class="flex justify-center mb-10">
+            <button 
+              onclick="toggleBlog()" 
+              id="blog-toggle-btn"
+              class="glass-card px-8 py-4 rounded-2xl border border-secondary/30 text-secondary font-bold hover:bg-secondary hover:text-black transition-all duration-300 group flex items-center gap-3 shadow-lg shadow-secondary/5"
+            >
+              <i class="fa-solid fa-terminal group-hover:rotate-12 transition-transform"></i>
+              <span>Blog-Beiträge laden</span>
+            </button>
+          </div>
+          
+          <div id="blog-container" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8 opacity-0 animate-fade-in-up">
+            
+            <article class="glass-card rounded-2xl p-8 hover:border-secondary/50 transition-all duration-300 group">
+              <div class="flex items-center gap-4 text-sm mb-4">
+                <span class="text-accent font-mono">03. Jan 2026</span>
+                <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-white/60">DevLog</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 group-hover:text-secondary transition-colors text-left">
+                Warum ich Python für Noder gewählt habe
+              </h3>
+              <p class="text-white/60 mb-6 leading-relaxed text-left">
+                Ich habe mich für die Sprache Python für mein Projekt Noder entschieden, weil ich mich ausprobieren wollte, die Sprache etwas mehr lernen wollte und mehr über das Thema Sicherheit erfahren wollte.
+              </p>
+              <a href="blog-noder.html" class="inline-flex items-center gap-2 text-secondary font-semibold hover:gap-3 transition-all">
+                Weiterlesen <i class="fa-solid fa-arrow-right text-sm"></i>
+              </a>
+            </article>
+
+            <article class="glass-card rounded-2xl p-8 hover:border-secondary/50 transition-all duration-300 group">
+              <div class="flex items-center gap-4 text-sm mb-4">
+                <span class="text-accent font-mono">10. Aug 2025</span>
+                <span class="px-2 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-white/60">DevLog</span>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 group-hover:text-secondary transition-colors text-left">
+                Discord Bot
+              </h3>
+              <p class="text-white/60 mb-6 leading-relaxed text-left">
+                Ein Discord Bot, den ich programmiert habe und den ich für jeden zur Verfügung stelle. Erfahre mehr über die Funktionen und das Hosting.
+              </p>
+              <a href="blog-discord-bot.html" class="inline-flex items-center gap-2 text-secondary font-semibold hover:gap-3 transition-all">
+                Weiterlesen <i class="fa-solid fa-arrow-right text-sm"></i>
+              </a>
+            </article>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="text-center py-8 text-white/40 text-sm font-mono border-t border-white/5"
+    >
+      &copy; 2025 Sedin Mulasalihovic. Built with Code.
+    </footer>
 
     <script>
-      // Dark Mode
-      document.getElementById("modeToggle").onclick = () =>
-        document.body.classList.toggle("dark");
+      // TYPEWRITER EFFECT
+const words = ["Sedin Mulasalihovic", "ein Developer", "ein Linux Fan", "ein Student"];
+let i = 0;
+let timer;
 
-      // === FIXER ENDZEITPUNKT ===
-      // 19.02 um 22:00 Uhr deutscher Zeit (MEZ = UTC+1)
-      const END_TIME = new Date("2026-02-19T21:00:00Z").getTime();
-      const timerEl = document.getElementById("timer");
+function typeWriter() {
+  const heading = document.getElementById("typewriter");
+  const word = words[i];
+  const currentText = heading.innerText;
 
-      function updateTimer() {
-        const diff = END_TIME - Date.now();
+  if (currentText.length < word.length) {
+    heading.innerText = word.substring(0, currentText.length + 1);
+    timer = setTimeout(typeWriter, 100); // Tipp-Geschwindigkeit
+  } else {
+    setTimeout(deleteText, 2000); // Wartezeit bevor es gelöscht wird
+  }
+}
 
-        if (diff <= 0) {
-          timerEl.textContent = "⏰ Zeit abgelaufen";
-          return;
-        }
+function deleteText() {
+  const heading = document.getElementById("typewriter");
+  const currentText = heading.innerText;
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / (1000 * 60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
+  if (currentText.length > 0) {
+    heading.innerText = currentText.substring(0, currentText.length - 1);
+    timer = setTimeout(deleteText, 50); // Lösch-Geschwindigkeit
+  } else {
+    i = (i + 1) % words.length;
+    typeWriter();
+  }
+}
 
-        timerEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
-      }
+// Startet den Effekt erst, wenn der Loader weg ist (nach 2.2 Sekunden)
+setTimeout(typeWriter, 2200);
+      const loaderProgress = document.getElementById("loader-progress");
+      const intro = document.getElementById("intro");
 
-      updateTimer();
-      setInterval(updateTimer, 1000);
+      window.addEventListener("load", () => {
+        loaderProgress.style.width = "100%";
+        setTimeout(() => {
+          intro.style.opacity = "0";
+          intro.style.pointerEvents = "none";
+          setTimeout(() => {
+            intro.remove();
+          }, 700);
+        }, 1500);
+      });
+      function toggleBlog() {
+  const container = document.getElementById("blog-container");
+  const btn = document.getElementById("blog-toggle-btn");
 
-      // === PARTICLES ===
-      const canvas = document.getElementById("particles");
-      const ctx = canvas.getContext("2d");
-      let w, h, particles;
+  if (container.classList.contains("hidden")) {
+    // Blog anzeigen
+    container.classList.remove("hidden");
+    // Kurze Verzögerung für die Animation
+    setTimeout(() => {
+      container.style.opacity = "1";
+    }, 10);
+    
+    // Button Text ändern
+    btn.innerHTML = '<i class="fa-solid fa-xmark"></i> <span>Schließen</span>';
+    btn.classList.replace("text-secondary", "text-white");
+    btn.classList.add("border-white/20");
+  } else {
+    // Blog verstecken
+    container.classList.add("hidden");
+    container.style.opacity = "0";
+    
+    // Button zurücksetzen
+    btn.innerHTML = '<i class="fa-solid fa-terminal group-hover:rotate-12 transition-transform"></i> <span>Blog-Beiträge laden</span>';
+    btn.classList.replace("text-white", "text-secondary");
+  }
+}
+// CUSTOM CURSOR
+const cursorDot = document.getElementById("cursor-dot");
+const cursorOutline = document.getElementById("cursor-outline");
 
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        particles = Array.from({ length: 100 }, () => ({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 2 + 0.5,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-        }));
-      }
+window.addEventListener("mousemove", (e) => {
+  const posX = e.clientX;
+  const posY = e.clientY;
 
-      window.addEventListener("resize", resize);
-      resize();
+  // Punkt folgt sofort
+  cursorDot.style.left = `${posX}px`;
+  cursorDot.style.top = `${posY}px`;
+  cursorDot.style.transform = "translate(-50%, -50%)";
 
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-        for (const p of particles) {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
+  // Outline folgt verzögert (smooth)
+  cursorOutline.animate({
+    left: `${posX}px`,
+    top: `${posY}px`
+  }, { duration: 500, fill: "forwards" });
+  
+  cursorOutline.style.transform = "translate(-50%, -50%)";
+});
 
-          ctx.beginPath();
-          ctx.fillStyle = "rgba(78,243,195,0.5)";
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        requestAnimationFrame(draw);
-      }
-      draw();
+// Hover-Effekt für Links und Buttons
+const interactiveElements = document.querySelectorAll('a, button');
+
+interactiveElements.forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursorOutline.style.transform = "translate(-50%, -50%) scale(1.5)";
+    cursorOutline.style.backgroundColor = "rgba(78, 243, 195, 0.2)"; // Accent Color transparent
+    cursorOutline.style.borderColor = "transparent";
+  });
+  
+  el.addEventListener('mouseleave', () => {
+    cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
+    cursorOutline.style.backgroundColor = "transparent";
+    cursorOutline.style.borderColor = "rgba(255, 255, 255, 0.5)";
+  });
+});
     </script>
   </body>
 </html>
